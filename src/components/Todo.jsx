@@ -18,16 +18,27 @@ const Todo = () => {
         }
     ])
 
+    const [newTaskTitle, setNewTaskTitle] = useState('')
+
     const deleteAllTasks = () => {
-       console.log('Delete all tasks')
+       const isConfirmed = confirm('Are you sure you want to delete all?')
+
+       if(isConfirmed) {
+        setTasks([])
+       }
+
     }
 
     const deleteTask = (taskId) => {
-        console.log(`Delete task with id: ${taskId}`)
+        setTasks(tasks.filter((task) => task.id !== taskId))
     }
 
     const toggleTaskCompletion = (taskId, isDone) => {
-        console.log(`Toggle completion for task with id: ${taskId} ${isDone ? 'done' : 'not done'}`)
+        setTasks(
+            tasks.map((task) =>
+            task.id === taskId ? { ...task, isDone } : task
+            )
+        )
     }
 
     const filterTasks = (query) => {
@@ -35,13 +46,26 @@ const Todo = () => {
     }
 
     const addTask = () => {
-        console.log(`Add task with`)
+        if(newTaskTitle.trim().length > 0) {
+            const newTask = {
+                id: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(),
+                title: newTaskTitle,
+                isDone: false,
+            }
+
+            setTasks([...tasks, newTask])
+            setNewTaskTitle('')
+        }
     }
 
     return (
         <div className="todo">
         <h1 className="todo__title">To Do List</h1>
-        <AddTaskForm onAddTask={addTask} />
+        <AddTaskForm 
+            onAddTask={addTask}
+            newTaskTitle={newTaskTitle}
+            setTaskTitle={setNewTaskTitle}
+        />
         <SearchTaskForm onSearchInput={filterTasks} />
         <InfoTodo 
             total={tasks.length} 

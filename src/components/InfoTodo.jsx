@@ -1,13 +1,18 @@
-import { memo } from "react"
+import { memo, useContext, useMemo } from "react"
+import { TaskContext } from "../context/TaskContext"
 
-const InfoTodo = (props) => {
+const InfoTodo = () => {
     const { 
-      total, 
-      done,
-      onDeleteButtonClick 
-    } = props
+      tasks,
+      deleteAllTasks
+    } = useContext(TaskContext)
 
+    const total = tasks.length
     const hasTasks = total > 0
+        const done = useMemo(() => {
+        return tasks.filter((task) => task.isDone).length
+    }, [tasks])
+
 
     return (
       <div className="todo__info">
@@ -18,7 +23,7 @@ const InfoTodo = (props) => {
           <button
             className="todo__delete-all-button"
             type="button"
-            onClick={onDeleteButtonClick}
+            onClick={deleteAllTasks}
           >
             Delete all
           </button>

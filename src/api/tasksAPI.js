@@ -9,6 +9,12 @@ const tasksAPI = {
         return fetch(URL)
             .then((response) => response.json())
     },
+
+    getById: (id) => {
+        return fetch(`${URL}/${id}`)
+            .then((response) => response.json())
+    },
+
     add: (task) => {
         return fetch(URL, {
             method: 'POST',
@@ -16,15 +22,18 @@ const tasksAPI = {
             body: JSON.stringify(task),
         }).then((response) => response.json())
     },
+
     delete: (id) => {
         return fetch(`${URL}/${id}`, {
             method: 'DELETE',
         })
     },
+
     deleteAll: (tasks) => {
         return Promise.all(
             tasks.map(({ id }) => tasksAPI.delete(id)))
     },
+
     toggleCompletion: (id, isDone) => {
         return fetch(`${URL}/${id}`, {
             method: 'PATCH',

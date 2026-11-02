@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "./Button.jsx";
 import Field from "./Field.jsx";
 import { TaskContext } from "../context/TaskContext.jsx";
@@ -12,6 +12,10 @@ const AddTaskForm = () => {
     } = useContext(TaskContext)
 
     const [error, setError] = useState('')
+
+    useEffect(() => {
+        newTaskInputRef.current?.focus()
+    }, [newTaskInputRef])
 
     const clearNewTaskTitle = newTaskTitle.trim()
     const isNewTaskTitleEmpty = clearNewTaskTitle.length === 0

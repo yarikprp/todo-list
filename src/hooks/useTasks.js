@@ -52,8 +52,6 @@ const useTasks = () => {
     }, [])
     
     useEffect(() => {
-        newTaskInputRef.current.focus()
-
         tasksAPI.getAll().then(setTasks)
     }, [])
 

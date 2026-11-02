@@ -8,5 +8,14 @@ services:
       - node_modules:/app/node_modules
     command: npm run dev -- --host 0.0.0.0
 
+  api:
+    build: .
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    command: npm run server -- --host 0.0.0.0
+
 volumes:
   node_modules:

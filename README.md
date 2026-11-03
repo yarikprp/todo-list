@@ -76,6 +76,27 @@ docker compose exec app npm run preview
 
 Откройте <http://localhost:4173>. Порт `4173` опубликован в Compose, а preview слушает сетевой интерфейс контейнера.
 
+## Публикация на GitHub Pages
+
+Скрипт `npm run deploy` собирает приложение, создаёт `dist/404.html` для SPA-маршрутов и публикует каталог `dist` в ветку `gh-pages`. Docker-образ содержит Git. Перед первой публикацией настройте автора коммитов в репозитории и убедитесь, что настроен remote `origin` и есть право отправлять в него изменения:
+
+```bash
+docker compose exec app git config user.name "Ваше имя"
+docker compose exec app git config user.email "ваш-email@example.com"
+docker compose exec app npm run deploy
+```
+
+Для контейнерного деплоя также должны быть доступны GitHub credentials. Либо выполните `npm run deploy` локально из окружения, где настроены Node.js, Git и авторизация GitHub.
+
+GitHub не принимает пароль аккаунта для Git по HTTPS. При запросе `Username` укажите имя пользователя GitHub, а при запросе `Password` вставьте Personal Access Token (PAT) с правом `Contents: Read and write` для этого репозитория (для classic token требуется scope `repo`). Создать токен можно в настройках GitHub → Developer settings → Personal access tokens. Не вставляйте токен в URL репозитория, команды или файлы проекта; при вводе в запрос `Password` символы обычно не отображаются.
+
+Если деплой завершился ошибкой `a branch named 'gh-pages' already exists`, очистите кэш `gh-pages` и повторите команду:
+
+```bash
+docker compose exec app npx gh-pages-clean
+docker compose exec app npm run deploy
+```
+
 ## Данные и адреса страниц
 
 JSON Server читает и сохраняет задачи в `db.json`. Ресурс API — `/tasks`. Адрес API (`http://localhost:3001/tasks`) задан в `src/shared/api/tasks/index.js`.

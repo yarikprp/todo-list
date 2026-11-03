@@ -1,4 +1,4 @@
-import Todo from '../components/Todo.jsx'
+import Todo from '../components/Todo/Todo.jsx'
 
 const TasksPage = () => {
     return (

@@ -20,6 +20,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "json-server": "^1.0.0-beta.15",
     "oxlint": "^1.89.0",
+    "sass": "^1.107.1",
     "vite": "^8.3.5"
   }
 }

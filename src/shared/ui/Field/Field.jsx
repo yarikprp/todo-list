@@ -26,7 +26,7 @@ const Field = (props) => {
             placeholder=" "
             autoComplete="off"
             type={type}
-            value={value}
+            value={value ?? ''}
             onInput={onInput}
             ref={ref}
           />

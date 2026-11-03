@@ -66,7 +66,6 @@ export const TasksProvider = (props) => {
         appearingTaskId,
         firstIncompleteTaskRef,
         firstIncompleteTaskId,
-
     ])
 
     return (

@@ -1,0 +1,1 @@
+export { default } from '@/widgets/Todo/Todo.jsx'

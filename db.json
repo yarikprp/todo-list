@@ -44,16 +44,6 @@
       "title": "12",
       "isDone": false,
       "id": "54S_lSYZhM0"
-    },
-    {
-      "title": "21",
-      "isDone": false,
-      "id": "Hz-UMLkIGkU"
-    },
-    {
-      "title": "2",
-      "isDone": false,
-      "id": "wTdbLRKg5YE"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

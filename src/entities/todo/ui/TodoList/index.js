@@ -1,0 +1,1 @@
+export { default } from '@/entities/todo/ui/TodoList/TodoList.jsx'

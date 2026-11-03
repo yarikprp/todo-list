@@ -1,0 +1,5 @@
+import '@/app/styles/normalize.css'
+import '@/app/styles/fonts.css'
+import '@/app/styles/variables.css'
+import '@/app/styles/utils.css'
+import '@/app/styles/globals.css'

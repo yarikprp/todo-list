@@ -3,11 +3,11 @@ import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
 // https://vite.dev/config/
-export default defineConfig((mode) => {
+export default defineConfig(({ mode }) => {
     const isProd = mode === 'production'
 
     return {
-      base: isProd ? '/todo-react/' : '/',
+      base: isProd ? '/todo-list/' : '/',
       plugins: [react()],
       resolve: {
         alias: {

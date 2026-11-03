@@ -15,7 +15,7 @@ const Todo = () => {
         <AddTaskForm styles={styles} />
         <SearchTaskForm styles={styles} />
         <InfoTodo styles={styles} />
-        <Button className={styles.deleteAllButton} onClick={() => firstIncompleteTaskRef.current?.scrollIntoView({ behavior: 'smooth' })}>
+        <Button onClick={() => firstIncompleteTaskRef.current?.scrollIntoView({ behavior: 'smooth' })}>
             Show first incomplete task
         </Button>
         <TodoList styles={styles} />

@@ -49,7 +49,7 @@ const TodoItem = (props) => {
           </label>
           <RouterLink
             aria-label={`View details for ${title}`}
-            to={`/tasks/${id}`}
+            to={`tasks/${id}`}
           >
             <span dangerouslySetInnerHTML={{ __html: highlightedTitle }} />
           </RouterLink>

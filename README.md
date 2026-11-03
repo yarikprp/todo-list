@@ -67,6 +67,15 @@ npm run preview   # просмотр production-сборки
 npm run lint      # проверка кода Oxlint
 ```
 
+Чтобы проверить production-сборку в Docker, сначала создайте её, затем запустите preview в контейнере:
+
+```bash
+docker compose exec app npm run build
+docker compose exec app npm run preview
+```
+
+Откройте <http://localhost:4173>. Порт `4173` опубликован в Compose, а preview слушает сетевой интерфейс контейнера.
+
 ## Данные и адреса страниц
 
 JSON Server читает и сохраняет задачи в `db.json`. Ресурс API — `/tasks`. Адрес API (`http://localhost:3001/tasks`) задан в `src/shared/api/tasks/index.js`.

@@ -90,12 +90,7 @@ docker compose exec app npm run deploy
 
 GitHub не принимает пароль аккаунта для Git по HTTPS. При запросе `Username` укажите имя пользователя GitHub, а при запросе `Password` вставьте Personal Access Token (PAT) с правом `Contents: Read and write` для этого репозитория (для classic token требуется scope `repo`). Создать токен можно в настройках GitHub → Developer settings → Personal access tokens. Не вставляйте токен в URL репозитория, команды или файлы проекта; при вводе в запрос `Password` символы обычно не отображаются.
 
-Если деплой завершился ошибкой `a branch named 'gh-pages' already exists`, очистите кэш `gh-pages` и повторите команду:
-
-```bash
-docker compose exec app npx gh-pages-clean
-docker compose exec app npm run deploy
-```
+Перед публикацией скрипт автоматически очищает локальный кэш `gh-pages`, чтобы избежать конфликтов с оставшейся после предыдущей попытки веткой. Очистка не удаляет и не изменяет ветки на GitHub.
 
 ## Данные и адреса страниц
 

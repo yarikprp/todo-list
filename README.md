@@ -1,16 +1,89 @@
-# React + Vite
+# To Do List
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Веб-приложение для управления задачами на React. Интерфейс собран с помощью Vite, данные хранятся в JSON Server.
 
-Currently, two official plugins are available:
+## Возможности
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Добавление и удаление задач, в том числе удаление всех задач.
+- Отметка задачи как выполненной.
+- Поиск задач по названию с подсветкой совпадений.
+- Просмотр задачи и её статуса на отдельной странице.
+- Переход к первой невыполненной задаче.
 
-## React Compiler
+## Технологии
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite
+- Sass
+- JSON Server
+- Docker Compose
 
-## Expanding the Oxlint configuration
+## Запуск через Docker
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Нужны Docker Desktop и Docker Compose. Из корня проекта выполните:
+
+```bash
+docker compose up --build
+```
+
+После запуска:
+
+- приложение: <http://localhost:5173>
+- API задач: <http://localhost:3001/tasks>
+
+Остановить контейнеры можно сочетанием `Ctrl+C`. Для запуска в фоне используйте `docker compose up --build -d`, а для остановки — `docker compose down`.
+
+## Локальный запуск без Docker
+
+Нужен Node.js версии 22 или новее.
+
+1. Установите зависимости:
+
+   ```bash
+   npm install
+   ```
+
+2. Запустите JSON Server в первом терминале:
+
+   ```bash
+   npm run server
+   ```
+
+3. Запустите Vite во втором терминале:
+
+   ```bash
+   npm run dev
+   ```
+
+Откройте адрес, указанный Vite (обычно <http://localhost:5173>). API запускается на порту `3001`.
+
+## Команды
+
+```bash
+npm run dev       # запуск Vite в режиме разработки
+npm run server    # запуск JSON Server на порту 3001
+npm run build     # production-сборка в dist/
+npm run preview   # просмотр production-сборки
+npm run lint      # проверка кода Oxlint
+```
+
+## Данные и адреса страниц
+
+JSON Server читает и сохраняет задачи в `db.json`. Ресурс API — `/tasks`. Адрес API (`http://localhost:3001/tasks`) задан в `src/shared/api/tasks/index.js`.
+
+- `/` — список задач.
+- `/tasks/:id` — отдельная задача и её статус.
+
+## Структура исходников
+
+```text
+src/
+├── app/                 # сборка приложения, маршрутизация и глобальные стили
+├── entities/todo/       # модель задач, контекст, список и элемент задачи
+├── features/            # добавление, поиск и статистика задач
+├── pages/               # страницы списка и отдельной задачи
+├── shared/              # API, общие UI-компоненты, хуки и ресурсы
+└── widgets/             # составной виджет списка задач
+```
+
+В Vite настроен алиас `@`, который указывает на каталог `src`. Например: `@/shared/api/tasks/index.js`.
